@@ -1,7 +1,10 @@
 # Programación Backend - CoderHouse - Cliente/Servidor
 
-## Servidor
+## Información del proyecto🎇
+Es un proyecto e-commerce que tiene tanto el lado del cliente en ReactJS y el lado del servidor ExpressJS.
+
+### Servidor
 [Ir al servidor](servidor)
 
-## Cliente
+### Cliente
 [Ir al cliente](cliente)
