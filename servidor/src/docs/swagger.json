@@ -32,9 +32,60 @@
     {
       "name": "Usuarios",
       "description": "Operaciones con usuarios"
+    },
+    {
+      "name": "Configuración",
+      "description": "Configuración del servidor"
     }
   ],
   "paths": {
+    "/api/configuration": {
+      "get": {
+        "tags": [
+          "Configuración"
+        ],
+        "summary": "Obtiene la configuración del servidor",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "argv": {
+                      "type": "array"
+                    },
+                    "platform": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "memory": {
+                      "type": "number"
+                    },
+                    "executable": {
+                      "type": "string"
+                    },
+                    "pid": {
+                      "type": "number"
+                    },
+                    "path": {
+                      "type": "string"
+                    },
+                    "cpus": {
+                      "type": "number"
+                    }
+                  }
+                }
+              
+          }
+        }
+      }
+    }
+  }
+},
     "/api/productos": {
       "get": {
         "security": [
@@ -242,7 +293,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Carrito"
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Producto"
+                    }
+                  },
+                  "direccion": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "userId": "1"
+                },
+                "xml": {
+                  "name": "Carrito"
+                }
               }
             }
           },
@@ -400,7 +471,27 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Carrito"
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Producto"
+                    }
+                  },
+                  "direccion": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "productos": [ "1" ]
+                },
+                "xml": {
+                  "name": "Carrito"
+                }
               }
             }
           },
@@ -659,7 +750,7 @@
                 ],
                 "example": {
                   "email": "user01@test.com",
-                  "password": 1234567
+                  "password": "1234567"
                 }
               }
             }
@@ -759,9 +850,6 @@
             "type": "string"
           }
         },
-        "example": {
-          "userId": 2
-        },
         "xml": {
           "name": "Carrito"
         }
@@ -795,6 +883,9 @@
           "password": {
             "type": "string"
           },
+          "confirmPassword": {
+            "type": "string"
+          },
           "nombre": {
             "type": "string"
           },
@@ -812,13 +903,14 @@
           }
         },
         "example": {
-          "email": "user01@test.com,",
-          "password": "1234567,",
-          "nombre": "Test Name,",
-          "direccion": "abc 123,",
-          "edad": "20,",
-          "telefono": "+5491101020304,",
-          "foto": "test"
+          "email": "user01@test.com",
+          "password": "1234567",
+          "confirmPassword": "1234567",
+          "nombre": "Test Name",
+          "direccion": "abc 123",
+          "edad": "20",
+          "telefono": "+5491101020304",
+          "foto": "https://i.picsum.photos/id/40/4106/2806.jpg?hmac=MY3ra98ut044LaWPEKwZowgydHZ_rZZUuOHrc3mL5mI"
         },
         "xml": {
           "name": "Usuario"
