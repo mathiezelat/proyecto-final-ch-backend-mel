@@ -19,7 +19,7 @@ npm start
 6. En la ruta "/" ingresas a la página, un pequeño Front End en React JS.
 
 ## Visita la página en donde está corriendo el proyecto con Front End 👓
-Click [Acá](https://xshop.netlify.app/) para ir a la _página_.
+Click [Acá](https://ecommercer-ch-mel-proyecto-fin.herokuapp.com/login) para ir a la _página_.
 
 ## Paquetes utilizados 🛠️
 - **_dotenv_**
