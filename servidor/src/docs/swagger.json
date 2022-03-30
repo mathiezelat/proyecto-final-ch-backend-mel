@@ -1,0 +1,836 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Proyecto Final - Programación Backend - Mathías Ezequiel Latrónico",
+    "description": "Es una API RESTful hecha en Node.js utilizando el framework de Express.js que consiste en un sistema de login. un sistema de agregar, eliminar, modificar productos. un sistema de carrito para agregar, eliminar productos al carrito y generar una orden con el sistema de ordenes, por último tiene un sistema de chat con websocket.",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "GitHub",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/",
+      "variables": {},
+      "description": "Modo desarrollo"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Productos",
+      "description": "Operaciones con productos"
+    },
+    {
+      "name": "Carritos",
+      "description": "Operaciones con carritos"
+    },
+    {
+      "name": "Ordenes",
+      "description": "Operaciones con ordenes"
+    },
+    {
+      "name": "Usuarios",
+      "description": "Operaciones con usuarios"
+    }
+  ],
+  "paths": {
+    "/api/productos": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Obtiene todos los productos",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Agrega un producto",
+        "requestBody": {
+          "description": "Objeto de producto para agregar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/productos/{productoId}": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al producto que queremos obtener.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Obtiene un producto",
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          },
+          "404": {
+            "description": "Producto no encontado",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al producto que queremos modificar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Modifica un producto",
+        "requestBody": {
+          "description": "Objeto de producto para modificarlo",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          },
+          "404": {
+            "description": "Producto no encontado",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al producto que queremos borrar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Productos"
+        ],
+        "summary": "Borra un producto",
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          },
+          "404": {
+            "description": "Producto no encontado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/carritos": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Obtiene todos los carritos",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Carrito"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Agrega un nuevo carrito",
+        "requestBody": {
+          "description": "Objeto del carrito para agregar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrito"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/carritos/user": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Obtiene el carrito por email del usuario",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "schema": {
+              "type": "string"
+            },
+            "description": "El email del usuario para retornar el carrito del usuario."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrito"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Carrito no encontado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/carritos/{carritoId}": {
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Borra un carrito",
+        "parameters": [
+          {
+            "name": "carritoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al carrito que queremos borrar.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrito"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Carrito no encontado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/carritos/{carritoId}/productos": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Obtiene los productos del carrito",
+        "parameters": [
+          {
+            "name": "carritoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al carrito que queremos obtener los productos.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrito"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Carrito no encontado",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Agrega un carrito",
+        "parameters": [
+          {
+            "name": "carritoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al carrito que queremos agregar los productos.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto de carrito para agregar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrito"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/carritos/{carritoId}/productos/{productoId}": {
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Carritos"
+        ],
+        "summary": "Borra un producto del carrito",
+        "parameters": [
+          {
+            "name": "carritoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al carrito que queremos borrar producto.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productoId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al producto que queremos borrar del carrito.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrito"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Carrito no encontado o producto no encontrado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Ordenes"
+        ],
+        "summary": "Obtiene todas las ordenes",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Orden"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Ordenes"
+        ],
+        "summary": "Agrega una nueva orden",
+        "requestBody": {
+          "description": "Objeto de orden para agregar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Orden"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/orders/user": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Ordenes"
+        ],
+        "summary": "Obtiene una orden por email del usuario",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "schema": {
+              "type": "string"
+            },
+            "description": "El email del usuario para retornar una orden del usuario."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Orden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Orden no encontado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/{userId}": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Obtiene el usuario por id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "Ruta para llamar al usuario por id.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Usuario"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuario no encontado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/signup": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Registra un usuario y lo obtiene",
+        "requestBody": {
+          "description": "Objeto del usuario para registrar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Registra un usuario y lo obtiene",
+        "requestBody": {
+          "description": "Objeto del usuario para registrar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "example": {
+                  "email": "user01@test.com",
+                  "password": 1234567
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/profile": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "Obtiene el usuario authorizando por jwt",
+        "responses": {
+          "400": {
+            "description": "No es un ID válido",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "number"
+          },
+          "codigo": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "nombre",
+          "descripcion",
+          "categoria",
+          "foto",
+          "precio",
+          "stock",
+          "codigo"
+        ],
+        "example": {
+          "nombre": "manzana",
+          "descripcion": "es roja",
+          "categoria": "comida",
+          "foto": "https://picsum.photos/200/300?random=1",
+          "precio": 50,
+          "stock": 15,
+          "codigo": 1
+        },
+        "xml": {
+          "name": "Producto"
+        }
+      },
+      "Carrito": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Producto"
+            }
+          },
+          "direccion": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "userId": 2
+        },
+        "xml": {
+          "name": "Carrito"
+        }
+      },
+      "Orden": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Producto"
+            }
+          }
+        },
+        "example": {
+          "cartId": 2
+        },
+        "xml": {
+          "name": "Orden"
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "direccion": {
+            "type": "string"
+          },
+          "edad": {
+            "type": "number"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "email": "user01@test.com,",
+          "password": "1234567,",
+          "nombre": "Test Name,",
+          "direccion": "abc 123,",
+          "edad": "20,",
+          "telefono": "+5491101020304,",
+          "foto": "test"
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
