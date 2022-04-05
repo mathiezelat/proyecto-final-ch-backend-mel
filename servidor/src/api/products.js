@@ -4,7 +4,7 @@ const productsApi = new ProductsRepo();
 
 const createProduct = async (product) => {
     try {
-        return await productsApi.createProduct(product);
+        return productsApi.createProduct(product);
     } catch (error) {
         throw error;
     }
@@ -12,7 +12,7 @@ const createProduct = async (product) => {
 
 const getAllProducts = async () => {
     try {
-        return await productsApi.getAllProducts();
+        return productsApi.getAllProducts();
     } catch (error) {
         throw error;
     }
@@ -20,7 +20,7 @@ const getAllProducts = async () => {
 
 const getAllProductsByIds = async (ids) => {
     try {
-        return await productsApi.getAllProductsByIds(ids);
+        return productsApi.getAllProductsByIds(ids);
     } catch (error) {
         throw error;
     }
@@ -28,7 +28,7 @@ const getAllProductsByIds = async (ids) => {
 
 const getProductById = async (id) => {
     try {
-        return await productsApi.getProductById(id);
+        return productsApi.getProductById(id);
     } catch (error) {
         throw error;
     }
@@ -36,7 +36,7 @@ const getProductById = async (id) => {
 
 const updateProduct = async (id, newProduct) => {
     try {
-        return await productsApi.updateProduct(id, newProduct);
+        return productsApi.updateProduct(id, newProduct);
     } catch (error) {
         throw error;
     }
@@ -44,8 +44,7 @@ const updateProduct = async (id, newProduct) => {
 
 const deleteProduct = async (id) => {
     try {
-        return await productsApi.deleteProduct(id);
-        s;
+        return productsApi.deleteProduct(id);
     } catch (error) {
         throw error;
     }

@@ -1,5 +1,5 @@
-const OrderDto = require('../DTOs/order.dto');
-const { ordersDao } = require('../DAOs');
+const OrderDto = require('../persistence/DTOs/order.dto');
+const { ordersDao } = require('../persistence/DAOs');
 
 class OrdersRepo {
     constructor() {

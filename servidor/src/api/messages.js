@@ -4,7 +4,7 @@ const messagesApi = new MessagesRepo();
 
 const createMessage = async(newMessage) => {
     try {
-        return await messagesApi.createMessage(newMessage);
+        return messagesApi.createMessage(newMessage);
     } catch (error) {
         throw error;
     }
@@ -12,7 +12,7 @@ const createMessage = async(newMessage) => {
 
 const getAllMessages = async () => {
     try {
-        return await messagesApi.getAllMessages();
+        return messagesApi.getAllMessages();
     } catch (error) {
         throw error;
     }
@@ -20,7 +20,7 @@ const getAllMessages = async () => {
 
 const getAllMessagesByEmail = async (email) => {
     try {
-        return await messagesApi.getAllMessagesByEmail(email);
+        return messagesApi.getAllMessagesByEmail(email);
     } catch (error) {
         throw error;
     }

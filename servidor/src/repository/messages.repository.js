@@ -1,6 +1,6 @@
-const MessageDto = require('../DTOs/message.dto');
+const MessageDto = require('../persistence/DTOs/message.dto');
 
-const { messagesDao } = require('../DAOs');
+const { messagesDao } = require('../persistence/DAOs');
 
 class MessagesRepo {
     constructor() {

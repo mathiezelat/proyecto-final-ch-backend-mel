@@ -33,7 +33,7 @@ const createOrder = async (cartId) => {
 
 const getAllOrders = async () => {
     try {
-        return await ordersApi.getAllOrders();
+        return ordersApi.getAllOrders();
     } catch (error) {
         throw error;
     }
@@ -41,7 +41,7 @@ const getAllOrders = async () => {
 
 const getOrderById = async (id) => {
     try {
-        return await ordersApi.getOrderById(id);
+        return ordersApi.getOrderById(id);
     } catch (error) {
         throw error;
     }
@@ -49,7 +49,7 @@ const getOrderById = async (id) => {
 
 const getOrdersByEmail = async(email) => {
     try {
-        return await ordersApi.getOrdersByEmail(email);
+        return ordersApi.getOrdersByEmail(email);
     } catch (error) {
         throw error;
     }

@@ -1,7 +1,7 @@
-const CartDto = require('../DTOs/cart.dto');
-const ProductDto = require('../DTOs/product.dto');
+const CartDto = require('../persistence/DTOs/cart.dto');
+const ProductDto = require('../persistence/DTOs/product.dto');
 
-const { cartsDao } = require('../DAOs');
+const { cartsDao } = require('../persistence/DAOs');
 
 class CartsRepo {
     constructor() {
@@ -14,7 +14,6 @@ class CartsRepo {
             const cartDto = new CartDto(cart);
             return cartDto;
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -28,7 +27,6 @@ class CartsRepo {
             });
             return cartsDto;
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -54,7 +52,6 @@ class CartsRepo {
             });
             return cartsDto;
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -67,7 +64,6 @@ class CartsRepo {
                 return cartDto;
             }
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -80,7 +76,6 @@ class CartsRepo {
                 return cartDto;
             }
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -93,7 +88,6 @@ class CartsRepo {
                 return cartDto;
             }
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -119,7 +113,6 @@ class CartsRepo {
             });
             return productsDto;
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -132,7 +125,6 @@ class CartsRepo {
                 return cartDto;
             }
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }
@@ -145,7 +137,6 @@ class CartsRepo {
                 return cartDto;
             }
         } catch (error) {
-            console.log({error});
             throw error;
         }
     }

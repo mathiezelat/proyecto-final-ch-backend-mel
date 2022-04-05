@@ -1,5 +1,5 @@
-const ProductDto = require('../DTOs/product.dto');
-const { productsDao } = require('../DAOs');
+const ProductDto = require('../persistence/DTOs/product.dto');
+const { productsDao } = require('../persistence/DAOs');
 
 class ProductsRepo {
     constructor() {

@@ -52,7 +52,6 @@ const productsPost = async (req, res, next) => {
 
         res.status(201).json(product);
     } catch (error) {
-        console.log(error);
         next(error);
     }
 };

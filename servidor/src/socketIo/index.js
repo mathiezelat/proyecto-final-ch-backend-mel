@@ -1,3 +1,5 @@
+const logger = require('../logger/winston');
+
 const {
     createMessage,
     getAllMessages,
@@ -5,8 +7,7 @@ const {
 } = require('../api/messages');
 
 const socketIo = async (io, socket) => {
-    console.log(`Nuevo cliente conectado, socketId: ${socket.id}`);
-
+    logger.info(`Nuevo cliente conectado, socketId: ${socket.id}`);
     socket.emit('messages', await getAllMessages());
 
     socket.on('message', async (newMessage) => {
