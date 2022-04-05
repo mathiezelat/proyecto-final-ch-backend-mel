@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# datebase
+/DB/*.json
+
 # environments
 development.env
 production.env
