@@ -3,6 +3,14 @@ const fs = require('fs');
 class ContenedorArchivo {
     constructor(archivo) {
         this.archivo = archivo;
+        this.init();
+    }
+
+    async init() {
+        const isFolderExists = fs.existsSync('DB');
+        if(!isFolderExists) {
+            await fs.promises.mkdir('DB');
+        }
     }
 
     async writeFile(data) {
@@ -12,11 +20,7 @@ class ContenedorArchivo {
                 JSON.stringify(data, null, 2),
             );
         } catch (error) {
-            throw {
-                ...error,
-                name: 'Ocurrio un error al guardar el archivo',
-                description: 'Error al guardar información del archivo',
-            };
+            throw error;
         }
     }
 
@@ -32,11 +36,7 @@ class ContenedorArchivo {
 
             return data;
         } catch (error) {
-            throw {
-                ...error,
-                name: 'Ocurrio un error al leer el archivo',
-                description: 'Error al obtener información del archivo',
-            };
+            throw error;
         }
     }
 }

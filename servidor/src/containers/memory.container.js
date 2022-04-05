@@ -12,11 +12,7 @@ class ContenedorMemoria {
             this.database[this.collection] = data;
             return data;
         } catch (error) {
-            throw {
-                ...error,
-                name: 'Ocurrio un error al guardar en memoria',
-                description: 'Error al guardar información en memoria',
-            };
+            throw error;
         }
     }
 
@@ -26,11 +22,7 @@ class ContenedorMemoria {
             if (!data) return [];
             return data;
         } catch (error) {
-            throw {
-                ...error,
-                name: 'Ocurrio un error al leer en memoria',
-                description: 'Error al obtener información en memoria',
-            };
+            throw error;
         }
     }
 }
