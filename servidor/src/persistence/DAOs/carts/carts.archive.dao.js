@@ -22,7 +22,7 @@ class CarritosDaoArchivo extends ContenedorArchivo {
             if (!carts.length) {
                 cart._id = '1';
             } else {
-                cart._id = (Number(carts[carts.length - 1]._id) + 1).toString();
+                cart._id = String(Math.max(...carts.map(c => Number(c._id))) + 1);
             }
 
             carts.push(cart);
